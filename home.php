@@ -1,103 +1,193 @@
 <?php
 
-    session_start();
-       // print_r($_SESSION);
+session_start();
+// print_r($_SESSION);
 
-    if((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true))
-    {
-        unset($_SESSION['usuario']);
-        unset($_SESSION['senha']);
-        header('Location: index.php');
-    }
-    $logado = $_SESSION['usuario'];
+if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == true)) {
+  unset($_SESSION['usuario']);
+  unset($_SESSION['senha']);
+  header('Location: index.php');
+}
+$logado = $_SESSION['usuario'];
 
-   
+
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Centrocor menu</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <style>
-            body{
-                font-family: Arial, Helvetica, sans-serif;
-                background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
-                text-align: center;
-                color: white;
-            }
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centrocor menu</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, rgb(20, 147, 220), rgb(17, 54, 71));
+      box-sizing: border-box;
+      height: 100vh;
+      width: 100vw;
+      color: white;
+    }
 
-            .box{
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background-color: rgb(0,0,0,0.4);
-                padding: 90px;
-                border-radius: 10px;
-            }
-            a{
-                text-decoration: none;
-                color: white;
-                border: 3px solid dodgerblue;
-                border-radius: 10px;
-                padding: 10px;
-            }
-            a:hover{
-                background-color: dodgerblue;
-            }
+    .header {
+      background: linear-gradient(to right, rgb(249, 249, 249), rgb(17, 54, 71));
+      height: 150px;
+    }
 
-        </style>
+    .container {
+      height: 100vh;
+      width: 100vw;
+    }
 
+    .container-main {
+      margin-top: 50px;
+    }
 
+    .content-list {
+      margin-top: 150px;
+      align-items: center;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    li > a {
+      color: white;
+      text-decoration: none;
+    }
+
+    li > a:hover {
+      transition: .2s ease;
+      color: white;
+      font-size: 150%;
+    }
+
+    .img-logo {
+      margin-top: 10px;
+      margin-left: 30px;
+      width: 8rem;
+    }
+
+    .layout-button {
+      margin-top: 10px;
+      margin-right: 30px;
+    }
+    
+    button > a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 
 </head>
+
+  
+
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Centrocor Diagnostico</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-        <div class="d-flex">
-            <a href="sair.php" class="btn btn-danger me-5">logout</a>
-            
-        </div>
-    </nav>
-    <h3>Sistema de consulta e impressão de exames</h3>
-    <h4>__________________________________________________________________</h4>
-    <?php
-        echo "<h5>Usuário <u>$logado</u></h5>";
-    ?>
-    <br><br><br>
+  <div class="container-fluid p-0 m-0">
+    <header class="header d-flex justify-content-between navbar navbar-expand-lg navbar-dark">
+      <div class="">
+        <a class="navbar-brand" href="#">
+          <img src="./assets/Logo_CENTROCOR-01.png" class="img-logo" alt="Logo centrocor">
+        </a>
+      </div>
+      <div class="layout-button d-flex">
+        <button 
+          onclick="logout()"
+          type="button" 
+          class="btn btn-danger me-5"
+        >
+        Sair
+        </button>
+      </div>
+    </header>
+    <main class="container-main d-flex flex-column">
+      <div class="text-center">
+        <h3>Sistema de consulta e impressão de exames</h3>
+        <h4>__________________________________________________________________</h4>
+        <?php
+        echo "<h5>Usuário: <strong>$logado</strong></h5>";
+        ?>
+      </div>
+      <div class="list-a content-list d-flex justify-content-evenly">
+        <ul class="d-flex">
+          <li class="m-3">
+            <a href="sistema.php">
+              Consultar exames
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="formulario.php">
+              Cadastrar exames
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="usuarios.php">
+              Cadastrar Usuarios
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="imprimir.php">
+              Imprimir Exames
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="">
+              frase Doctor
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="">
+              Codigos de exames
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="importar.php">
+              Importar
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="pdf.php">
+              Gerar PDF
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="visualizar_arquivo.php">
+              visualizar exames
+            </a>
+          </li>
+          <li class="m-3">
+            <a href="resultado.php">
+              Gerar Resultados
+            </a>
+          </li>
+        </ul>
+      </div>
+    </main>
+  </div>
 
-        <div class="box"> 
-            <a href="sistema.php" >Consultar exames</a>
-            <a href="formulario.php">Cadastrar exames</a>
-            
-            <a href="usuarios.php">Cadastrar Usuarios</a>
-            <a href="imprimir.php">Imprimir Exames</a>
-            
-            <a href="">frase Doctor</a>
-            <br><br><br>
-            <a href="">Codigos de exames</a>
-            
-            <a href="importar.php">Importar</a>
-            <a href="pdf.php">Gerar PDF</a>
-            
-            <a href="visualizar_arquivo.php">visualizar exames</a>
-            <a href="resultado.php">Gerar Resultados</a>
-            
-            
-        </div>
-        
-           
-        
+
+  <script>
+    function logout() {
+
+      var conf = confirm('deseja sair?')
+      
+      if(conf === true) {
+        window.location.href ="sair.php"
+      } else {
+        return;
+      }
+    }
+  </script>
+  
+  
 </body>
-
 </html>
