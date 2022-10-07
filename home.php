@@ -40,17 +40,33 @@ $logado = $_SESSION['usuario'];
       height: 150px;
     }
 
+    .user-container {
+      transition: .2s ease;
+      width: 100px;
+      margin-right: 20px;
+      align-items: center;
+    }
+
+    .icon-user {
+      background: white;
+      cursor: pointer;
+      margin-bottom: 4px;
+      border-radius: 50%;
+      width: 50px;
+    }
+
     .container {
       height: 100vh;
       width: 100vw;
     }
 
     .container-main {
-      margin-top: 50px;
+      height: 50px;
+      padding: 0;
+      margin-top: 10px;
     }
 
     .content-list {
-      margin-top: 150px;
       align-items: center;
     }
 
@@ -64,20 +80,18 @@ $logado = $_SESSION['usuario'];
     }
 
     li > a:hover {
-      transition: .2s ease;
+      transition: .3s ease;
       color: white;
       font-size: 150%;
     }
 
     .img-logo {
-      margin-top: 10px;
       margin-left: 30px;
       width: 8rem;
     }
 
-    .layout-button {
-      margin-top: 10px;
-      margin-right: 30px;
+    .bnt-logout {
+      display: none;
     }
     
     button > a {
@@ -99,25 +113,25 @@ $logado = $_SESSION['usuario'];
           <img src="./assets/Logo_CENTROCOR-01.png" class="img-logo" alt="Logo centrocor">
         </a>
       </div>
-      <div class="layout-button d-flex">
-        <button 
-          onclick="logout()"
-          type="button" 
-          class="btn btn-danger me-5"
-        >
-        Sair
-        </button>
+      <div class="user-container d-flex flex-column justify-content-center">
+        <img id="user" class="icon-user" src="./assets/usuario.png" alt="Icone de usuário">
+        <?php
+          echo "<h6>$logado</h6>";
+          ?>
+        <div class="bnt-logout-container d-flex">
+          <button 
+            onclick="logout()"
+            type="button" 
+            class="bnt-logout btn btn-danger"
+          >
+          Sair
+          </button>
+        </div>
       </div>
     </header>
+    
     <main class="container-main d-flex flex-column">
-      <div class="text-center">
-        <h3>Sistema de consulta e impressão de exames</h3>
-        <h4>__________________________________________________________________</h4>
-        <?php
-        echo "<h5>Usuário: <strong>$logado</strong></h5>";
-        ?>
-      </div>
-      <div class="list-a content-list d-flex justify-content-evenly">
+      <div class="content-list d-flex justify-content-evenly">
         <ul class="d-flex">
           <li class="m-3">
             <a href="sistema.php">
@@ -174,11 +188,24 @@ $logado = $_SESSION['usuario'];
     </main>
   </div>
 
-
   <script>
+    
+    let user = document.querySelector("#user");
+    let button = document.querySelector(".bnt-logout")
+    
+    user.addEventListener("click", function() {
+      if(button.style.display === "none") {
+        button.style.display = "block"
+      } else {
+        button.style.display = "none"
+      }
+    })
+    
+    
     function logout() {
-
-      var conf = confirm('deseja sair?')
+    
+    
+      let conf = confirm('deseja sair?')
       
       if(conf === true) {
         window.location.href ="sair.php"
@@ -186,8 +213,7 @@ $logado = $_SESSION['usuario'];
         return;
       }
     }
+    
   </script>
-  
-  
 </body>
 </html>
