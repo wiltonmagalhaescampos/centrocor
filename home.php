@@ -9,8 +9,6 @@ if ((!isset($_SESSION['usuario']) == true) and (!isset($_SESSION['senha']) == tr
   header('Location: index.php');
 }
 $logado = $_SESSION['usuario'];
-
-
 ?>
 
 
@@ -71,6 +69,7 @@ $logado = $_SESSION['usuario'];
     }
 
     ul, li {
+      transition: transform 0.6s ease-in-out;
       list-style: none;
     }
 
@@ -80,9 +79,8 @@ $logado = $_SESSION['usuario'];
     }
 
     li > a:hover {
-      transition: .3s ease;
       color: white;
-      font-size: 150%;
+      transform: scale(1.5);
     }
 
     .img-logo {
@@ -205,7 +203,7 @@ $logado = $_SESSION['usuario'];
     function logout() {
     
     
-      let conf = confirm('deseja sair?')
+      let conf = confirm('Deseja sair?')
       
       if(conf === true) {
         window.location.href ="sair.php"
